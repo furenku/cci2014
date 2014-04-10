@@ -1,5 +1,9 @@
+$include-html-classes: true;
+
 @import "settings";
 @import "foundation";
+@import "foundation/components/dropdown";
+@import "foundation/components/dropdown-buttons";
 
 // Or selectively include components
 // @import
@@ -38,3 +42,174 @@
 //   "foundation/components/type",
 //   "foundation/components/offcanvas",
 //   "foundation/components/visibility";
+
+
+
+
+.pad1 {
+    padding:20px;
+}
+
+.pad2 {
+    padding:20px;
+}
+
+.bbox {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+body {
+    font-size:13px;
+}
+
+
+
+
+
+.diaCalHorizontal {
+
+    @extend .bbox;
+
+    padding: 3px;
+    width:3.22%;
+
+    height:35px;
+    float:left;
+    display: inline-block;
+
+    font-size: 10px;
+
+    border-left:1px solid black;
+
+    &:first-child {
+	border:none;
+    }
+
+    &:nth-of-type(9), &:hover {
+        background-color:#ffef1e;
+    }
+    .numero {
+	font-size: 12px;	
+    }
+
+
+    .eventos, .eventoDia {
+	display:none;
+
+    }
+
+}
+
+
+ul {
+    list-style: none;
+
+    margin:0;
+}
+
+
+
+
+
+
+
+
+
+#calendario {
+
+    margin-bottom:20px;
+
+}
+
+
+#cabecera {
+
+    & > div {
+	height:400px;
+	@extend .pad2;
+    }
+
+    margin-bottom:40px;
+}
+
+#fechaPrincipal {
+    margin-top:50px;
+}
+
+.img {
+    background-color:#ccc;
+}
+
+
+
+#menu {
+
+    a {
+	color:#000;
+    }
+
+}
+
+
+
+.botonFecha {
+
+    padding:0 2px;
+    
+    color:#000;
+
+    a {
+	color:#000;
+    }
+    
+    &:hover {
+	background-color:#eee;
+	
+    }
+}
+
+
+
+h5 {
+
+    margin: 0;
+}
+
+
+
+#entradas {
+
+
+    .entrada {
+	@extend .bbox;
+	@extend .pad1;
+
+	
+	height:300px;
+	display:inline-block;
+	overflow:auto;
+
+	&:hover {
+	    background-color:#ddd;
+	}
+    }
+
+}
+
+
+
+#footer {
+
+    border-top:1px solid #ddd;
+    
+    margin-top:30px;
+    padding:10px 0;
+    text-align:right;
+}
