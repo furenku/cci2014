@@ -50,7 +50,8 @@ function calendarioHTML() {
 
   $dropdowns = '<div id="dropdownAnhos">'.$dd.'</div>';
   
-  $nombreMes = array_keys( $datosMeses )[ (int) $showMonth - 1 ];
+  $nombreMes = array_keys( $datosMeses );
+  $nombreMes = $nombreMes[ (int) $showMonth - 1 ];
   $numsMeses = $eventos[$showYear];
   $nombresMeses = array_keys( $datosMeses );
   $nombresMesesExistentes = array();
