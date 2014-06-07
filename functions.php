@@ -119,7 +119,7 @@ function entradas() {
 
   
   <div class="entrada large-<?php echo rand(1,3)*2;  ?> columns">
-    <?php if(rand(0,3)<1){ ?>
+    <?php if(rand(0,5)<2){ ?>
       <img src="img/tele.png"/>
       <?php } else {  ?>
     <div class="titulo"><h3>Título de entrada</h3></div>

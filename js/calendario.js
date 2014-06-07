@@ -1,5 +1,28 @@
 jQuery(document).ready(function($){
 
+    targetDiv = $('#diasMes');
+
+    var dataObj = {
+        action: 'seleccionar_mes',
+        anho: 2014, 
+        mes: 'Junio' 
+    };
+    targetDiv = $('#diasMes');
+
+    
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        data: dataObj,
+        dataType: 'text',
+        success: function(data) {
+            targetDiv.html(data);	    
+        }
+    });
+
+
+
+
 
     function ajaxCall( key, value1, value2 ) {
 	var targetDiv;
