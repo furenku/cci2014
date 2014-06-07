@@ -1,41 +1,87 @@
 <?php
 
-function listaEventos() {
-  global $tmpEventos;
+require('lista_eventos.php');
+
+
+global $datosMeses;
+
+$datosMeses = array("Enero"=>31, "Febrero" => 28, "Marzo" => 31, "Abril" => 30, "Mayo" => 31, "Junio" => 30, "Julio" => 31, "Agosto" => 31, "Septiembre" => 30, "Octubre" => 31, "Noviembre" => 30, "Diciembre" => 31 );
+
+
+function generarDropdown( $type, $value, $arr ) {
   global $eventos;
+  if($type == "anho"){
+    $id = "anhos";
+  }
+  if($type == "mes"){
+    $id = "meses";
+  }
+
+  $echo =  '<a href="#" data-dropdown="'.$id.'_dropdown" class="botonFecha dropdown">';
+  $echo .='<span class="dropdown-text">'.$value.'</span>';
+  $echo .= '<span class="fa fa-angle-down"></span>';
+  $echo .= '</a>';
+
+  $echo .='<ul id="'.$id.'_dropdown" data-dropdown-content class="f-dropdown">';
+
+  foreach( $arr as $key ) {
+    $echo .= '<li><a href="#">'.$key.'</a></li>';
+  }
   
-  $tmpEventos = array();
-  $eventos = array();
+  $echo  .= '</ul>';
 
-  // juanpis:
-
-  $evento = array();
-  $evento['ttl'] = 'La Purga. Juan Pablo Villegas';
-  $evento['dates'] = array('06/12/2014');
-
-  array_push( $tmpEventos, $evento );
-
-
-  // cartucho:
-
-  $evento = array();
-  $evento['ttl'] = 'Presentación de la revista Cartucho #9: <i> ¿México?  ¿Me lo repite por favor? </i>';
-  $evento['ext'] = 'Consulta cartelera en <a href="http://www.revistacartucho.com">http://www.revistacartucho.com</a>';
-  $evento['dates'] = array('06/20/2014','06/21/2014');
-
-  array_push( $tmpEventos, $evento );
-
-
-
-  // eric y maik:
-
-  $evento = array();
-  $evento['ttl'] = 'Exposición de Erick Tlaseca y Miguel Daly';
-  $evento['dates'] = array('07/24/2014');
-
-  array_push( $tmpEventos, $evento );
+  return $echo;
 
 }
+
+
+function calendarioHTML() {
+
+  global $datosMeses;
+  global $eventos;
+  
+  $monthDropdowns = array();
+  
+  $showYear = date('Y');
+  $showMonth = date('m');
+  $showDay = date('d');
+
+  $dd = generarDropdown( 'anho', $showYear, array_keys($eventos) );
+
+  $dropdowns = '<div id="dropdownAnhos">'.$dd.'</div>';
+  
+  $nombreMes = array_keys( $datosMeses )[ (int) $showMonth - 1 ];
+  $numsMeses = $eventos[$showYear];
+  $nombresMeses = array_keys( $datosMeses );
+  $nombresMesesExistentes = array();
+  
+  foreach( $numsMeses as $num => $mes ) {
+    $nombresMesesExistentes[] = $nombresMeses[ (int) $num - 1 ];
+  }
+
+  
+  $dd = generarDropdown( 'mes', $nombreMes, $nombresMesesExistentes );
+
+  $dropdowns .= '<div id="dropdownMeses">'.$dd.'</div>';
+  
+  
+
+  $echo = '<div id="calendario" class="row">';
+  $echo .= '<div id="dropdownsFechas" class="large-2 columns">'.$dropdowns.'</div>';
+  $echo .= '<div id="diasMes" class="large-10 columns">&nbsp</div>';
+  $echo .= '</div>';
+
+  echo $echo;
+?>
+
+<script type="text/javascript" src="js/calendario.js"></script>
+
+<?php 
+
+}
+
+
+
 
 
 function estructuraCalendario() {
@@ -48,7 +94,7 @@ function estructuraCalendario() {
     
     foreach($evento['dates'] as $date) {
       $year = date('Y', strtotime($date));
-      $month = date('m', strtotime($date));
+      $month = date('n', strtotime($date));
       $day = date('d', strtotime($date));
 
       // existen ya eventos en año?
@@ -75,8 +121,8 @@ function estructuraCalendario() {
       } 
       /* $dayArr = $monthArr[$day]; */
 
-      echo "insertar dia<br>";
-      array_push( $eventos[$year][$month][$day], "</br>evento el ". $day  );
+      
+      array_push( $eventos[$year][$month][$day], $evento );
       
       /* array_push( $dayArr, "evento el ". $day ); */
       
@@ -84,28 +130,10 @@ function estructuraCalendario() {
       //array_push( $eventos[$year], 
     }
 
-    /*
-    array_push( $monthArr, $dayArr );
-    array_push( $yearArr, $monthArr );
-    $eventos = $yearArr;
-    */
 
-}
+  }
 
-var_dump( $eventos ) ;
 
-echo '</br></br></br>';
-  /*
-  $eventos["2014"] = array();
-
-  $anho = $eventos["2014"];
-
-  $anho['06'] = array();
-  
-  $mes = $anho['06'];
-
-  array_push( $mes, $evento );
-  */
 }
 
 
@@ -199,13 +227,13 @@ function mostrarCalendario() {
     foreach( $meses as $mesArr ) {
       $drop .= '<li><a href="#">'.$mesArr["nombre"].'</a></li>';
     } 
-  
+    
     $echo  .= $drop . '</ul>';
-  
-  
+    
+    
     // nombre del año ( menú desplegable )
 
-  
+    
     $echo .=  '<a href="#" data-dropdown="dropAnhos" class="botonFecha dropdown">'.$anho['numero'].'</a>';
     $echo .='<ul id="dropAnhos" data-dropdown-content class="f-dropdown">';
 
@@ -214,13 +242,13 @@ function mostrarCalendario() {
     foreach( $cal as $anho ) {
       $drop .= '<li><a href="#">'.$anho["numero"].'</a></li>';
     } 
-  
+    
     $echo  .= $drop . '</ul>';
 
 
 
     echo $echo;
-?>
+    ?>
   </div> <!-- selector_fecha -->
   <div class="large-11 columns">  
 
@@ -233,7 +261,7 @@ function mostrarCalendario() {
     
     // crear html dias
 
-   
+    
     $numDias = count($dias);
     foreach( $dias as $dia ) {
     ?>
