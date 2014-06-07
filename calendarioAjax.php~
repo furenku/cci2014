@@ -1,0 +1,13 @@
+function ajax_test( $data ){
+
+  echo( json_encode( $data ) );
+
+}
+
+
+function seleccionarAnho( $anho ) {
+  global $eventos;
+
+  die( 123 ); // $eventos[$anho] ) );
+
+}

@@ -23,7 +23,8 @@
     
 
     <?php
-
+    
+    
     estructuraCalendario();
 
 
@@ -33,10 +34,25 @@
 
     cabecera();
 
+    introEspacio();
+
+    ?>
+ 
+    <div id="mesa" class="row">
+      <img src="img/mesa.png"  class="imgbanner large-12 columns" alt=""/>
+    </div>
+
+    <?php
+
+    seminariosEventos();
+    
+    
     entradas();
     
     ?>
 
+
+    
 
     <footer>
       <div id="footer" class="row">
