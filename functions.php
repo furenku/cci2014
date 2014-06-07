@@ -188,7 +188,8 @@ function seminariosEventos() {
   <div id="eventos" class="large-5 columns">
     <h4>Próximos eventos</h4>
     <li>
-    “La Purga” de Juan Pablo Villegas
+      <i>La Purga</i>
+</br>Juan Pablo Villegas
 </br>
 12 de Junio
 
@@ -199,7 +200,8 @@ function seminariosEventos() {
 
 
     </li>
-    <li>Presentación de la revista Cartucho #9 ¿México?  ¿Me lo repite por favor?
+    <li>Presentación de la revista Cartucho #9:
+<br><i>¿México?  ¿Me lo repite por favor?</i>
 </br>
 
 20 y 21 de Junio  Consulta cartelera en www.revistacartucho.com
